@@ -6,8 +6,6 @@ Author@R: c(person(given = "Connor", family = "Smith", email = "connor.smith@syd
 Maintainer: Connor Smith <connor.smith@sydney.edu.au>
 Description: A package to perform the VIVID algorithm
 License: Unpublished, do not distribute.
-RoxygenNote: 7.0.1
-
 Imports:
   latticeExtra,
   tidyverse,
@@ -17,3 +15,4 @@ Imports:
   future,
   dendsort,
   stringr
+RoxygenNote: 7.0.2
