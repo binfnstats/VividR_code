@@ -7,8 +7,7 @@
 #'
 #' @return 
 #' @export
-#'
-#' @examples
+
 
 cluster_search = function(hClust, varMat, sizeMin) {
   p = length(x = hClust$order + 1) # Dimension of the distance matrix

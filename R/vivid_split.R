@@ -20,8 +20,6 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
 
 vivid_split = function(x,
                        y,

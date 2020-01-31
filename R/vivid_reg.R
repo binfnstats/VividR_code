@@ -11,8 +11,7 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
+
 
 vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
   # Fit a ridge regression with observation weights

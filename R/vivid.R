@@ -20,8 +20,7 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
+
 
 vivid =
   function(x,

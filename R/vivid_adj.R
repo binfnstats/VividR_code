@@ -6,8 +6,7 @@
 #'
 #' @return
 #' @export
-#'
-#' @examples
+
 
 vivid_adj = function(vividObj, minFinalFeatures) {
   features = vividObj$selection
