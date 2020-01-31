@@ -1,10 +1,19 @@
 Package: VIVID
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2019-12-12
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Variability of Variable Importance Differences
+Version: 0.1
+Author@R: c(person(given = "Connor", family = "Smith", email = "connor.smith@sydney.edu.au", role = c("aut", "cre")))
+Maintainer: Connor Smith <connor.smith@sydney.edu.au>
+Description: A package to perform the VIVID algorithm
+License: Unpublished, do not distribute.
 RoxygenNote: 7.0.1
+
+Imports:
+  latticeExtra,
+  tidyverse,
+  furrr,
+  glmnet,
+  parallel,
+  future,
+  dendsort,
+  stringr

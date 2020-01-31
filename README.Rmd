@@ -36,6 +36,12 @@ Due to the construction of a $p$ by $p$ matrix, if $p$ is two large a divide and
 
 Once **VIVID** has been applied to a dataset, there is also a way of visualizing the information gathered throughout.
 
+# Installation
+```{r}
+library(devtools)
+devtools::install_github("binfnstats/VividR")
+```
+
 # The *sacurine* dataset
 
 Insert some information about the dataset here.
@@ -44,36 +50,17 @@ Insert some information about the dataset here.
 
 ## Required Packages
 
-For the use of **VIVID** the following packages are required (we provide both the install and loading commands):
+For the following example the \code{ropls} package is needed:
 
 ```{r eval = FALSE}
-install.packages('latticeExtra') #required for visualisation
-install.packages('tidyverse')
-install.packages('furrr') #required for parrallel processing
-install.packages('glmnet')
-install.packages('parallel')
-install.packages('future')
-install.packages('dendsort')
-install.packages('stringr')
-
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("ropls") #sacurine data
 ```
 
 ```{r warning=FALSE, message=FALSE}
-library('latticeExtra')
-library('tidyverse')
-library('furrr')
-library('glmnet')
 library('ropls')
-library('parallel')
-library('future')
-library('dendsort')
-library('stringr')
 ```
-
-Once all these packages have been installed, **VIVID** is ready to be installed.
 
 ## Loading
 
