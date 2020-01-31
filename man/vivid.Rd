@@ -9,10 +9,11 @@ vivid(
   y,
   bootstraps = 100,
   cores = parallel::detectCores() - 1,
+  crossfold = 10,
   seed = 1234567,
   minSize = 2,
   lambda = "lambda.1se",
-  compareMethod = "EBIC",
+  compareMethod = "BIC",
   gamma = 1
 )
 }

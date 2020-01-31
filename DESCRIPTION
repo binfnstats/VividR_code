@@ -6,6 +6,7 @@ Author@R: c(person(given = "Connor", family = "Smith", email = "connor.smith@syd
 Maintainer: Connor Smith <connor.smith@sydney.edu.au>
 Description: A package to perform the VIVID algorithm
 License: Unpublished, do not distribute.
+Encoding: UTF-8
 Imports:
   latticeExtra,
   tidyverse,
