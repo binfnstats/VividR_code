@@ -5,7 +5,8 @@
 #'
 #' @return
 #' @export
-
+#'
+#' @examples 1
 
 vivid_df = function(data) {
   # Changes data to dataframe structure

@@ -11,6 +11,8 @@
 #'
 #' @return
 #' @export
+#'
+#' @examples 1
 
 inf_criterion = function(model,
                          x,

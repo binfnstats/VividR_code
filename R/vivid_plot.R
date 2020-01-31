@@ -6,7 +6,8 @@
 #'
 #' @return
 #' @export
-
+#'
+#' @examples 1
 
 vivid_plot = function(vividObj, log = TRUE) {
   vividSplit  = vividObj$vividSplit

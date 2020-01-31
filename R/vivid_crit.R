@@ -10,7 +10,8 @@
 #'
 #' @return
 #' @export
-
+#'
+#' @examples 1
 
 vivid_crit = function(vividObj, x, y, metric, lambda = 'lambda.1se') {
   lambda = "lambda.min"
