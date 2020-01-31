@@ -19,4 +19,5 @@ Imports:
   future,
   dendsort,
   stringr
+VignetteBuilder: knitr
 RoxygenNote: 7.0.2
