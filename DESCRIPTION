@@ -11,6 +11,7 @@ RoxygenNote: 7.0.1
 Imports:
   latticeExtra,
   tidyverse,
+  furrr,
   glmnet,
   parallel,
   future,
