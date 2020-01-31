@@ -14,6 +14,5 @@ Imports:
   parallel,
   future,
   dendsort,
-  stringr,
-  rlang
+  stringr
 RoxygenNote: 7.0.2
