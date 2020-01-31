@@ -2,11 +2,14 @@ Package: VIVID
 Type: Package
 Title: Variability of Variable Importance Differences
 Version: 0.1
-Author@R: c(person(given = "Connor", family = "Smith", email = "connor.smith@sydney.edu.au", role = c("aut", "cre")))
+Author@R: c(
+  person(given = "Connor", family = "Smith", email = "connor.smith@sydney.edu.au", role = c("aut", "cre"))
+  )
 Maintainer: Connor Smith <connor.smith@sydney.edu.au>
 Description: A package to perform the VIVID algorithm
 License: Unpublished, do not distribute.
 Encoding: UTF-8
+LazyData: false
 Imports:
   latticeExtra,
   tidyverse,
