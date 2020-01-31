@@ -76,8 +76,7 @@ library(VIVID)
 The first step is to identify all the features to be included in the comparison. Since no pre-filtering step is being implemented we will use all features.
 
 ```{r}
-sacurine = readRDS("sacurine.rds")
-
+data("sacurine")
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
@@ -111,7 +110,7 @@ If no input is given, then each feature will resort to their default values:
 vivid.sacurine <- vivid(x = dat,
                         y = outcomes,
                         bootstraps = 75,
-                        cores = detectCores() - 1,
+                        cores = parallel::detectCores() - 1,
                         seed = 1234567,
                         lambda = 'lambda.min',
                         compareMethod = 'BIC')
@@ -223,7 +222,7 @@ To run this version of the code, the following function is used.
 vivid.sacurine_split <- vivid_split(x = dat,
                         y = outcomes,
                         bootstraps = 75,
-                        cores = detectCores() - 1,
+                        cores = parallel::detectCores() - 1,
                         seed = 1234567,
                         lambda = 'lambda.min',
                         compareMethod = 'BIC',
