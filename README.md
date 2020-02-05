@@ -89,7 +89,9 @@ Insert some information about the dataset here.
 
 ## Required Packages
 
-For the following example the  package is needed:
+For the following example the ‘ropls’ package is needed. The ‘ropls’
+package contains the sacurine dataset which this example is based
+around.
 
 ``` r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -101,22 +103,6 @@ BiocManager::install("ropls") #sacurine data
 library('ropls')
 ```
 
-## Loading
-
-We first load the **VIVID** package:
-
-``` r
-library(VIVID)
-```
-
-    ## 
-    ## Attaching package: 'VIVID'
-
-    ## The following objects are masked from 'package:VividR':
-    ## 
-    ##     cluster_search, inf_criterion, vivid, vivid_adj, vivid_crit,
-    ##     vivid_df, vivid_plot, vivid_reg, vivid_split
-
 ## *VIVID* feature selection
 
 The first step is to identify all the features to be included in the
@@ -124,7 +110,7 @@ comparison. Since no pre-filtering step is being implemented we will use
 all features.
 
 ``` r
-data("sacurine")
+data("sacurine") #Load sacurine dataset from the 'ropls' package
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
@@ -306,7 +292,7 @@ vivid.sacurine$selection[1:6,1:6]
 vivid.sacurine$sizes
 ```
 
-    ##  [1] 68 30 15 14 13 11  9  7  4  3  2
+    ##  [1] 68 30 15 14 13 11  9  7  4  3
 
 ### Method of comparison
 
@@ -323,7 +309,7 @@ vivid.sacurine$compareValues
 ```
 
     ##  [1] 384.4538 198.1562 150.7591 147.0434 144.0332 136.7904 126.6465 126.1071
-    ##  [9] 155.4008 157.9254 224.3565
+    ##  [9] 155.4008 157.9254
 
 ### Best feature group (Boolean)
 
@@ -481,8 +467,8 @@ sessionInfo()
     ## [8] base     
     ## 
     ## other attached packages:
-    ## [1] VIVID_0.1           ropls_1.18.2        Biobase_2.46.0     
-    ## [4] BiocGenerics_0.32.0 VividR_0.1.0       
+    ## [1] ropls_1.18.2        Biobase_2.46.0      BiocGenerics_0.32.0
+    ## [4] VividR_0.1.0       
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] Rcpp_1.0.3         compiler_3.6.1     pillar_1.4.3       iterators_1.0.12  
@@ -493,5 +479,5 @@ sessionInfo()
     ## [21] glmnet_3.0-2       grid_3.6.1         tidyselect_0.2.5   glue_1.3.1        
     ## [25] listenv_0.8.0      R6_2.4.1           rmarkdown_2.1      purrr_0.3.3       
     ## [29] magrittr_1.5       codetools_0.2-16   htmltools_0.4.0    matrixStats_0.55.0
-    ## [33] assertthat_0.2.1   shape_1.4.4        future_1.16.0      stringi_1.4.4     
+    ## [33] assertthat_0.2.1   future_1.16.0      shape_1.4.4        stringi_1.4.4     
     ## [37] crayon_1.3.4

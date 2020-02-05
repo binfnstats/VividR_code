@@ -54,7 +54,8 @@ Insert some information about the dataset here.
 
 ## Required Packages
 
-For the following example the \code{ropls} package is needed:
+For the following example the 'ropls' package is needed.
+The 'ropls' package contains the sacurine dataset which this example is based around.
 
 ```{r eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -66,21 +67,12 @@ BiocManager::install("ropls") #sacurine data
 library('ropls')
 ```
 
-## Loading
-
-We first load the **VIVID** package:
-
-```{r}
-library(VIVID)
-```
-
-
 ## *VIVID* feature selection
 
 The first step is to identify all the features to be included in the comparison. Since no pre-filtering step is being implemented we will use all features.
 
 ```{r}
-data("sacurine")
+data("sacurine") #Load sacurine dataset from the 'ropls' package
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
