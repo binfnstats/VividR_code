@@ -37,9 +37,13 @@ Due to the construction of a $p$ by $p$ matrix, if $p$ is two large a divide and
 Once **VIVID** has been applied to a dataset, there is also a way of visualizing the information gathered throughout.
 
 # Installation
-```{r}
+```{r eval = FALSE}
 library(devtools)
 devtools::install_github("binfnstats/VividR")
+```
+
+```{r}
+library('VividR')
 ```
 
 # The *sacurine* dataset
@@ -133,13 +137,13 @@ The function returns the following outputs:
 ### Coefficients
 
 ```{r}
-vivid.sacurine$coefficients[,1:6] %>% head()
+vivid.sacurine$coefficients[1:6,1:6]
 ```
 
 ### Variance matrix
 
 ```{r}
-vivid.sacurine$varMat[,1:6] %>% head()
+vivid.sacurine$varMat[1:6,1:6]
 ```
 
 ### Clustering
@@ -151,7 +155,7 @@ vivid.sacurine$varClust
 ### Feature group selection (Boolean)
 
 ```{r}
-vivid.sacurine$selection[,1:6] %>% head()
+vivid.sacurine$selection[1:6,1:6]
 ```
 
 ### Feature group sizes
@@ -175,7 +179,7 @@ vivid.sacurine$compareValues
 ### Best feature group (Boolean)
 
 ```{r}
-vivid.sacurine$optModel %>% head()
+vivid.sacurine$optModel[1:6]
 ```
 
 ### Best feature group (Names)

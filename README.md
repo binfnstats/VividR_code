@@ -70,6 +70,17 @@ large a divide and conquer method is implemented, as seen in Figure 1.
 Once **VIVID** has been applied to a dataset, there is also a way of
 visualizing the information gathered throughout.
 
+# Installation
+
+``` r
+library(devtools)
+devtools::install_github("binfnstats/VividR")
+```
+
+``` r
+library('VividR')
+```
+
 # The *sacurine* dataset
 
 Insert some information about the dataset here.
@@ -78,38 +89,17 @@ Insert some information about the dataset here.
 
 ## Required Packages
 
-For the use of **VIVID** the following packages are required (we provide
-both the install and loading commands):
+For the following example the  package is needed:
 
 ``` r
-install.packages('latticeExtra') #required for visualisation
-install.packages('tidyverse')
-install.packages('furrr') #required for parrallel processing
-install.packages('glmnet')
-install.packages('parallel')
-install.packages('future')
-install.packages('dendsort')
-install.packages('stringr')
-
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("ropls") #sacurine data
 ```
 
 ``` r
-library('latticeExtra')
-library('tidyverse')
-library('furrr')
-library('glmnet')
 library('ropls')
-library('parallel')
-library('future')
-library('dendsort')
-library('stringr')
 ```
-
-Once all these packages have been installed, **VIVID** is ready to be
-installed.
 
 ## Loading
 
@@ -119,6 +109,14 @@ We first load the **VIVID** package:
 library(VIVID)
 ```
 
+    ## 
+    ## Attaching package: 'VIVID'
+
+    ## The following objects are masked from 'package:VividR':
+    ## 
+    ##     cluster_search, inf_criterion, vivid, vivid_adj, vivid_crit,
+    ##     vivid_df, vivid_plot, vivid_reg, vivid_split
+
 ## *VIVID* feature selection
 
 The first step is to identify all the features to be included in the
@@ -126,8 +124,7 @@ comparison. Since no pre-filtering step is being implemented we will use
 all features.
 
 ``` r
-sacurine = readRDS("sacurine.rds")
-
+data("sacurine")
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
@@ -170,7 +167,7 @@ values:
 vivid.sacurine <- vivid(x = dat,
                         y = outcomes,
                         bootstraps = 75,
-                        cores = detectCores() - 1,
+                        cores = parallel::detectCores() - 1,
                         seed = 1234567,
                         lambda = 'lambda.min',
                         compareMethod = 'BIC')
@@ -208,7 +205,7 @@ The function returns the following outputs:
 ### Coefficients
 
 ``` r
-vivid.sacurine$coefficients[,1:6] %>% head()
+vivid.sacurine$coefficients[1:6,1:6]
 ```
 
     ##                                       id bootstrap_1 bootstrap_2 bootstrap_3
@@ -229,7 +226,7 @@ vivid.sacurine$coefficients[,1:6] %>% head()
 ### Variance matrix
 
 ``` r
-vivid.sacurine$varMat[,1:6] %>% head()
+vivid.sacurine$varMat[1:6,1:6]
 ```
 
     ##                                        (2-methoxyethoxy)propanoic acid isomer
@@ -278,7 +275,7 @@ vivid.sacurine$varClust
 ### Feature group selection (Boolean)
 
 ``` r
-vivid.sacurine$selection[,1:6] %>% head()
+vivid.sacurine$selection[1:6,1:6]
 ```
 
     ##      X.2.methoxyethoxy.propanoic.acid.isomer X.gamma.Glu.Leu.Ile
@@ -331,7 +328,7 @@ vivid.sacurine$compareValues
 ### Best feature group (Boolean)
 
 ``` r
-vivid.sacurine$optModel %>% head()
+vivid.sacurine$optModel[1:6]
 ```
 
     ## X.2.methoxyethoxy.propanoic.acid.isomer                     X.gamma.Glu.Leu.Ile 
@@ -408,7 +405,7 @@ To run this version of the code, the following function is used.
 vivid.sacurine_split <- vivid_split(x = dat,
                         y = outcomes,
                         bootstraps = 75,
-                        cores = detectCores() - 1,
+                        cores = parallel::detectCores() - 1,
                         seed = 1234567,
                         lambda = 'lambda.min',
                         compareMethod = 'BIC',
@@ -484,28 +481,17 @@ sessionInfo()
     ## [8] base     
     ## 
     ## other attached packages:
-    ##  [1] VIVID_1.0           dendsort_0.3.3      ropls_1.18.2       
-    ##  [4] Biobase_2.46.0      BiocGenerics_0.32.0 glmnet_3.0-2       
-    ##  [7] Matrix_1.2-17       furrr_0.1.0         future_1.15.1      
-    ## [10] forcats_0.4.0       stringr_1.4.0       dplyr_0.8.3        
-    ## [13] purrr_0.3.3         readr_1.3.1         tidyr_1.0.0        
-    ## [16] tibble_2.1.3        ggplot2_3.2.1       tidyverse_1.3.0    
-    ## [19] latticeExtra_0.6-29 lattice_0.20-38    
+    ## [1] VIVID_0.1           ropls_1.18.2        Biobase_2.46.0     
+    ## [4] BiocGenerics_0.32.0 VividR_0.1.0       
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.3         lubridate_1.7.4    listenv_0.8.0      png_0.1-7         
-    ##  [5] foreach_1.4.7      assertthat_0.2.1   zeallot_0.1.0      digest_0.6.23     
-    ##  [9] R6_2.4.1           cellranger_1.1.0   backports_1.1.5    reprex_0.3.0      
-    ## [13] evaluate_0.14      httr_1.4.1         pillar_1.4.3       rlang_0.4.1       
-    ## [17] lazyeval_0.2.2     readxl_1.3.1       rstudioapi_0.10    rmarkdown_2.0     
-    ## [21] munsell_0.5.0      broom_0.5.3        compiler_3.6.1     modelr_0.1.5      
-    ## [25] xfun_0.12          pkgconfig_2.0.3    shape_1.4.4        globals_0.12.5    
-    ## [29] htmltools_0.4.0    tidyselect_0.2.5   matrixStats_0.55.0 codetools_0.2-16  
-    ## [33] fansi_0.4.1        crayon_1.3.4       dbplyr_1.4.2       withr_2.1.2       
-    ## [37] grid_3.6.1         nlme_3.1-140       jsonlite_1.6       gtable_0.3.0      
-    ## [41] lifecycle_0.1.0    DBI_1.1.0          magrittr_1.5       scales_1.1.0      
-    ## [45] cli_2.0.1          stringi_1.4.4      fs_1.3.1           xml2_1.2.2        
-    ## [49] generics_0.0.2     vctrs_0.2.1        RColorBrewer_1.1-2 iterators_1.0.12  
-    ## [53] tools_3.6.1        glue_1.3.1         hms_0.5.3          jpeg_0.1-8.1      
-    ## [57] yaml_2.2.0         colorspace_1.4-1   rvest_0.3.5        knitr_1.26        
-    ## [61] haven_2.2.0
+    ##  [1] Rcpp_1.0.3         compiler_3.6.1     pillar_1.4.3       iterators_1.0.12  
+    ##  [5] tools_3.6.1        digest_0.6.23      evaluate_0.14      tibble_2.1.3      
+    ##  [9] lattice_0.20-38    pkgconfig_2.0.3    rlang_0.4.3        Matrix_1.2-17     
+    ## [13] foreach_1.4.7      yaml_2.2.1         xfun_0.12          furrr_0.1.0       
+    ## [17] dplyr_0.8.3        stringr_1.4.0      knitr_1.27         globals_0.12.5    
+    ## [21] glmnet_3.0-2       grid_3.6.1         tidyselect_0.2.5   glue_1.3.1        
+    ## [25] listenv_0.8.0      R6_2.4.1           rmarkdown_2.1      purrr_0.3.3       
+    ## [29] magrittr_1.5       codetools_0.2-16   htmltools_0.4.0    matrixStats_0.55.0
+    ## [33] assertthat_0.2.1   shape_1.4.4        future_1.16.0      stringi_1.4.4     
+    ## [37] crayon_1.3.4
