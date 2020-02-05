@@ -76,9 +76,6 @@ data("sacurine") #Load sacurine dataset from the 'ropls' package
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
-
-p <- NCOL(dat) # p = 109
-p
 ```
 
 The remaining parameters which can be set adjusted:
