@@ -20,17 +20,13 @@ vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
   nFolds = crossfold
   foldId = base::sample(base::rep(x = seq(nFolds),
                                   length.out = nrow(x)))
-  ridgeCV = NULL
-  attempt = 1
-  while (base::is.null(ridgeCV) && attempt <= 2) {
-    if (attempt == 1) {
-      ridgeCV = tryCatch(glmnet::cv.glmnet(x = x,
+  ridgeCV = tryCatch(glmnet::cv.glmnet(x = x,
                                       y = y,
                                       standardize = TRUE,
                                       alpha = 0,
                                       family = "binomial",
                                       weights = weight),
-      warning = function(weight, x, y){
+      error = function(weight, x, y){
         base::print(
           "Error in predmat[which, seq(nlami)] <- preds : replacement has length zero. Fixed lambda used."
         )
@@ -43,7 +39,7 @@ vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
           weights = weight,
           lambda = base::exp(base::seq(
             from = log(0.001),
-            to = log(5),
+            to = log(50),
             length.out = 100)))
       return(ridgeCVtest)
     }
