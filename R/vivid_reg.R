@@ -42,9 +42,8 @@ vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
             to = log(50),
             length.out = 100)))
       return(ridgeCVtest)
-    }
-      )
-    }
+      }
+  )
 
 
   # Compute coefficients
