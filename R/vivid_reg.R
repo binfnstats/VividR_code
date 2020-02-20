@@ -30,29 +30,25 @@ vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
                                       alpha = 0,
                                       family = "binomial",
                                       weights = weight),
-      warning = function(...)return(NA))
+      warning = function(weight, x, y){
+        base::print(
+          "Error in predmat[which, seq(nlami)] <- preds : replacement has length zero. Fixed lambda used."
+        )
+        ridgeCVtest = glmnet::cv.glmnet(
+          x = x,
+          y = y,
+          standardize = TRUE,
+          alpha = 0,
+          family = "binomial",
+          weights = weight,
+          lambda = base::exp(base::seq(
+            from = log(0.001),
+            to = log(5),
+            length.out = 100)))
+      return(ridgeCVtest)
     }
-
-    if (attempt == 2) {
-      base::print(
-        "Error in predmat[which, seq(nlami)] <- preds : replacement has length zero. Fixed lambda used."
-      )
-      ridgeCV = glmnet::cv.glmnet(
-        x = x,
-        y = y,
-        standardize = TRUE,
-        alpha = 0,
-        family = "binomial",
-        weights = weight,
-        lambda = base::exp(base::seq(
-          from = log(0.001),
-          to = log(5),
-          length.out =
-            100
-        ))
       )
     }
-
   }
 
   # Compute coefficients
