@@ -45,7 +45,7 @@ vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
     }
       )
     }
-  }
+
 
   # Compute coefficients
   ridgeCoef = glmnet::coef.glmnet(object = ridgeCV$glmnet.fit,
