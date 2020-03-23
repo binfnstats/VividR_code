@@ -3,10 +3,8 @@
 #'
 #' @param data A matrix
 #'
-#' @return
-#' @export
-#'
-#' @examples 1
+#' @return A data frame.
+
 
 vivid_df = function(data) {
   # Changes data to dataframe structure
@@ -17,6 +15,6 @@ vivid_df = function(data) {
   df = base::cbind(id = rownames(df),
                    df)
   base::rownames(df) = NULL
-  df
-
+  
+  return(df)
 }

@@ -8,23 +8,31 @@
 #' @param family GLM family.
 #' @param lambda Used in cv.glmnet.
 #' @param metric AIC,  AICc, BIC or EBIC.
+#' @param gamma value for EBIC.
+#' @importFrom glmnet cv.glmnet
+#' @importFrom glmnet glmnet
 #'
-#' @return
-#' @export
+#' @return The value of the metric when calculated from the model.
 #'
-#' @examples 1
+#' @examples
+#' 
+#' library('ropls')
+#' data("sacurine") #Load sacurine dataset from the 'ropls' package
+#' 
+#' dat = sacurine$dataMatrix
+#' outcomes = sacurine$sampleMetadata$gender
+#' 
+#' inf_criterion(model = rep(TRUE, NCOL(dat)), x = dat, y = outcomes)
 
 inf_criterion = function(model,
                          x,
                          y,
                          family = "binomial",
                          lambda = 'lambda.1se',
-                         metric = "EBIC",
+                         metric = "BIC",
                          gamma = gamma) {
-  n = length(y)
-  P = NCOL(x)
-
-  df = sum(model)
+  n = base::length(y)
+  P = base::NCOL(x)
 
   xNew = x[, model]
 
@@ -45,6 +53,13 @@ inf_criterion = function(model,
     lambda = CVGlmFit[[lambda]]
   )
 
+  XScaled = scale(x)
+  ld = CVGlmFit[[lambda]] * diag(ncol(XScaled))
+  H = XScaled %*% solve(t(XScaled) %*% XScaled + ld) %*% t(XScaled)
+  df = fBasics::tr(H)
+  
+  df = sum(model)
+  
   deviance = (1L - GlmFit$"dev.ratio") * GlmFit$"nulldev"
 
   base::switch(

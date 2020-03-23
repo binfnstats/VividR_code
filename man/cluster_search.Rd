@@ -14,7 +14,12 @@ cluster_search(hClust, varMat, sizeMin)
 \item{sizeMin}{Minimum size of cluster}
 }
 \value{
-
+A list of results:
+\itemize{
+\item{features}: A boolean matrix of features with each row corresponding to each tree cut.
+\item{value}: The average value of the corresponding set of features.
+\item{size}: The number of features selected in each cut.
+}
 }
 \description{
 Search of heirachical clustering

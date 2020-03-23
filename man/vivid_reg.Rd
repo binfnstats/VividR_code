@@ -4,7 +4,7 @@
 \alias{vivid_reg}
 \title{Regression method used in the VIVID method}
 \usage{
-vivid_reg(weight, x, y, crossfold = 10, lambda = "lambda.min")
+vivid_reg(weight, x, y, crossfold = 10, lambda = "lambda.1se")
 }
 \arguments{
 \item{weight}{A p length vector}
@@ -19,8 +19,17 @@ features. column names and row names are recommended.}
 \item{lambda}{Used in cv.glmnet.}
 }
 \value{
-
+A vector of estimated coefficient values.
 }
 \description{
 Regression method used in the VIVID method
+}
+\examples{
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+vivid_reg(weight = rep(1, NROW(dat)), x = dat, y = outcomes)
 }

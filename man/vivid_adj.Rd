@@ -12,8 +12,25 @@ vivid_adj(vividObj, minFinalFeatures)
 \item{minFinalFeatures}{Integer value for the minimum number of final features selected.}
 }
 \value{
-
+A list of results:
+\itemize{
+\item{optFeatures}: A character vector containing all features in the final vivid model, adjusted for minFinalFeatures.
+\item{n}: A count of the new number of optimum features.
+}
 }
 \description{
 Adjust variables in a VIVID object
+}
+\examples{
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+vividResults = vivid(x = dat,
+                     y = outcomes)
+                     
+vivid_adj(vividResults,
+minFinalFeatures = 10)
 }

@@ -4,11 +4,15 @@
 #' @param hClust Heirachical clustering.
 #' @param varMat Variance matrix
 #' @param sizeMin Minimum size of cluster
+#' @importFrom stats cutree
 #'
-#' @return 
-#' @export
-#'
-#' @examples 1
+#' @return A list of results:
+#' \itemize{
+#' \item{features}: A boolean matrix of features with each row corresponding to each tree cut.
+#' \item{value}: The average value of the corresponding set of features.
+#' \item{size}: The number of features selected in each cut.
+#' }
+
 
 cluster_search = function(hClust, varMat, sizeMin) {
   p = length(x = hClust$order + 1) # Dimension of the distance matrix

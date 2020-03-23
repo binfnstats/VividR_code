@@ -10,7 +10,7 @@ inf_criterion(
   y,
   family = "binomial",
   lambda = "lambda.1se",
-  metric = "EBIC",
+  metric = "BIC",
   gamma = gamma
 )
 }
@@ -27,10 +27,22 @@ features. column names and row names are recommended.}
 \item{lambda}{Used in cv.glmnet.}
 
 \item{metric}{AIC,  AICc, BIC or EBIC.}
+
+\item{gamma}{value for EBIC.}
 }
 \value{
-
+The value of the metric when calculated from the model.
 }
 \description{
 Information Criterion
+}
+\examples{
+
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+inf_criterion(model = rep(TRUE, NCOL(dat)), x = dat, y = outcomes)
 }

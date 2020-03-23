@@ -3,11 +3,25 @@
 #'
 #' @param vividObj An object passed from the vivid() funciton.
 #' @param log A TRUE or FALSE variable that defines whether the values plotted are log-transformed.
+#' @importFrom dendsort dendsort
+#' @importFrom stringr str_trunc
+#' @importFrom grDevices colorRampPalette
 #'
-#' @return
+#' @return A VIVID plot.
 #' @export
 #'
-#' @examples 1
+#' @examples 
+#' library('ropls')
+#' data("sacurine") #Load sacurine dataset from the 'ropls' package
+#' 
+#' dat = sacurine$dataMatrix
+#' outcomes = sacurine$sampleMetadata$gender
+#' 
+#' vividResults = vivid(x = dat,
+#'                      y = outcomes)
+#'                      
+#' vivid_plot(vividObj = vividResults)
+
 
 vivid_plot = function(vividObj, log = TRUE) {
   vividSplit  = vividObj$vividSplit

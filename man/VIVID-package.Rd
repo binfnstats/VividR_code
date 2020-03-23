@@ -13,7 +13,7 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{VIVID}
 \packageIndices{VIVID}
-~~ An overview of how to use the package, including the most important functions ~~
+
 }
 \author{
 \packageAuthor{VIVID}
@@ -21,13 +21,22 @@ The DESCRIPTION file:
 Maintainer: \packageMaintainer{VIVID}
 }
 \references{
-~~ Literature or other references for background information ~~
+
 }
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+vividResults = vivid(x = dat,
+     y = outcomes)
+     
+vividResults$optFeatures
+
+
 }

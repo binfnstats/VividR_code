@@ -12,8 +12,20 @@ vivid_plot(vividObj, log = TRUE)
 \item{log}{A TRUE or FALSE variable that defines whether the values plotted are log-transformed.}
 }
 \value{
-
+A VIVID plot.
 }
 \description{
 A funciton that creates graphics for the VIVID method
+}
+\examples{
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+vividResults = vivid(x = dat,
+                     y = outcomes)
+                     
+vivid_plot(vividObj = vividResults)
 }

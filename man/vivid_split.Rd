@@ -12,7 +12,7 @@ vivid_split(
   seed = 1234567,
   minSize = 2,
   lambda = "lambda.1se",
-  compareMethod = "EBIC",
+  compareMethod = "BIC",
   gamma = 1,
   groups,
   disjoint = TRUE,
@@ -53,4 +53,17 @@ future::plan.}
 }
 \description{
 VIVID method when the data must be split into multiple groups.
+}
+\examples{
+library('ropls')
+data("sacurine") #Load sacurine dataset from the 'ropls' package
+
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
+
+vividResults = vivid_split(x = dat,
+      y = outcomes,
+      groups = 2)
+      
+vividResults$optFeatures
 }

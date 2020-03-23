@@ -17,11 +17,24 @@
 #' @param groups Integer value for the total number of groups.
 #' @param disjoint TRUE or FALSE value on whether the groups are disjoint.
 #' @param repFeatures Vector of features that are repeated in each group.
+#' @importFrom furrr future_options
+#' @importFrom parallel detectCores
 #'
 #' @return
 #' @export
 #'
-#' @examples 1
+#' @examples
+#' library('ropls')
+#' data("sacurine") #Load sacurine dataset from the 'ropls' package
+#'
+#' dat = sacurine$dataMatrix
+#' outcomes = sacurine$sampleMetadata$gender
+#' 
+#' vividResults = vivid_split(x = dat,
+#'       y = outcomes,
+#'       groups = 2)
+#'       
+#' vividResults$optFeatures
 
 vivid_split = function(x,
                        y,
@@ -30,7 +43,7 @@ vivid_split = function(x,
                        seed = 1234567,
                        minSize = 2,
                        lambda = 'lambda.1se',
-                       compareMethod = 'EBIC',
+                       compareMethod = 'BIC',
                        gamma = 1,
                        groups,
                        disjoint = TRUE,
@@ -53,7 +66,7 @@ vivid_split = function(x,
   }
 
   # params
-  nObs <- base::nrow(x)
+  p = base::NCOL(x)
 
   base::RNGkind("L'Ecuyer-CMRG")
   base::set.seed(seed)
@@ -66,19 +79,20 @@ vivid_split = function(x,
                            times = groups + 1)
 
   if (disjoint == TRUE) {
-    groupSize = base::floor(nObs / groups)
-    remainder = nObs - groupSize * groups
+    groupSize = base::floor(p / groups)
+    remainder = p - groupSize * groups
     if (remainder == 0) {
       allocation = base::c(base::rep(x = 1:groups,
                                      times = groupSize))
     }
 
     if (remainder != 0) {
-      allocation = base::c(base::rep(x = 1:groups, times = groupSize), 1:remainder)
+      allocation = base::c(base::rep(x = 1:groups, 
+                                     times = groupSize), 1:remainder)
     }
 
     allocation = base::sample(x = allocation,
-                               size = nObs,
+                               size = p,
                                replace = FALSE)
 
     for (i in 1:groups) {
@@ -100,7 +114,7 @@ vivid_split = function(x,
   }
 
   if (disjoint == FALSE) {
-    ncol = nObs - base::length(repFeatures)
+    ncol = p - base::length(repFeatures)
     groupSize = base::floor(ncol / groups)
     remainder = ncol - groupSize * groups
     allocation = base::c(base::rep(x = 1:groups,
@@ -132,10 +146,10 @@ vivid_split = function(x,
 
   finalPool = base::matrix(data = NA_real_,
                            nrow = groups,
-                           ncol = nObs)
+                           ncol = p)
 
   for (j in 1:groups) {
-    whichVar = base::unlist(output[[j]]$opt_model)
+    whichVar = base::unlist(output[[j]]$optModel)
     finalPool = base::c(finalPool, featureTrack[[j]][whichVar])
   }
 
@@ -157,6 +171,6 @@ vivid_split = function(x,
 
   output$vividSplit = TRUE
 
-  output
+  return(output)
 
 }

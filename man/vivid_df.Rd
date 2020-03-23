@@ -10,7 +10,7 @@ vivid_df(data)
 \item{data}{A matrix}
 }
 \value{
-
+A data frame.
 }
 \description{
 Matrix to Data Frame

@@ -30,6 +30,8 @@ makes uses of the "future" and "furrr" packages and will set the plan to
 "multiprocess". The cores parameter is directly fed to workers arguement of
 future::plan.}
 
+\item{crossfold}{Integer number of cross folds used.}
+
 \item{seed}{integer, passed to set.seed function, a full L'Ecuyer-CMRG RNG seed (vector of 7 integers).}
 
 \item{minSize}{minimum cluster size to consider when clustering.}
@@ -62,11 +64,11 @@ VIVID
 library('ropls')
 data("sacurine") #Load sacurine dataset from the 'ropls' package
 
-dat <- sacurine$dataMatrix
-outcomes <- sacurine$sampleMetadata$gender
+dat = sacurine$dataMatrix
+outcomes = sacurine$sampleMetadata$gender
 
-vivid_results = vivid(x = dat,
+vividResults = vivid(x = dat,
       y = outcomes)
       
-vivid_results$optFeatures
+vividResults$optFeatures
 }

@@ -7,14 +7,15 @@
 #' makes uses of the "future" and "furrr" packages and will set the plan to
 #' "multiprocess". The cores parameter is directly fed to workers arguement of
 #' future::plan.
+#' @param crossfold Integer number of cross folds used.
 #' @param seed integer, passed to set.seed function, a full L'Ecuyer-CMRG RNG seed (vector of 7 integers).
 #' @param minSize minimum cluster size to consider when clustering.
 #' @param lambda Used in cv.glmnet.
 #' @param compareMethod AIC,  AICc, BIC or EBIC.
 #' @param gamma gamma value for EBIC.
 #' @importFrom furrr future_options
-#' @importFrom magrittr %>%
 #' @importFrom parallel detectCores
+#' @importFrom dplyr %>%
 #'
 #' @return A list of results:
 #' \itemize{
@@ -35,13 +36,13 @@
 #' library('ropls')
 #' data("sacurine") #Load sacurine dataset from the 'ropls' package
 #'
-#' dat <- sacurine$dataMatrix
-#' outcomes <- sacurine$sampleMetadata$gender
+#' dat = sacurine$dataMatrix
+#' outcomes = sacurine$sampleMetadata$gender
 #' 
-#' vivid_results = vivid(x = dat,
+#' vividResults = vivid(x = dat,
 #'       y = outcomes)
 #'       
-#' vivid_results$optFeatures
+#' vividResults$optFeatures
 
 vivid =
   function(x,

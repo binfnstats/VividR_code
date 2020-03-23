@@ -8,13 +8,21 @@
 #' @param y response variable, restricted to two classes.
 #' @param crossfold Number of crossfold samples.
 #' @param lambda Used in cv.glmnet.
+#' @importFrom glmnet cv.glmnet
+#' @importFrom glmnet coef.glmnet
 #'
-#' @return
-#' @export
+#' @return A vector of estimated coefficient values.
 #'
-#' @examples 1
+#' @examples 
+#' library('ropls')
+#' data("sacurine") #Load sacurine dataset from the 'ropls' package
+#'
+#' dat = sacurine$dataMatrix
+#' outcomes = sacurine$sampleMetadata$gender
+#' 
+#' vivid_reg(weight = rep(1, NROW(dat)), x = dat, y = outcomes)
 
-vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.min") {
+vivid_reg = function(weight, x, y, crossfold = 10, lambda = "lambda.1se") {
   # Fit a ridge regression with observation weights
 
   nFolds = crossfold
