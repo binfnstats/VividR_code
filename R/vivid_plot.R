@@ -53,7 +53,7 @@ vivid_plot = function(vividObj, log = TRUE) {
     side = "right"
   )
 
-  cc = grDevices::colorRampPalette(c("green", "yellow", "red", "darkred"))
+  cc = grDevices::colorRampPalette(c("darkgreen", "green", "yellow", "red", "darkred"))
   lattice::trellis.par.set(regions = list(col = cc(100)))
 
 
