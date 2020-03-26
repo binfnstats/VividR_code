@@ -17,8 +17,9 @@ suitable candidate groups of a similar nature.
 
 Within VIVID we aim to achieve a variety of goals which include:
 
-1.  Remove the arbitrary cut-off employed when selecting the top \(k\)
-    features through a filtering style method.
+1.  Remove the arbitrary cut-off employed when selecting the top
+    <img src="https://latex.codecogs.com/gif.latex?k" /> features
+    through a filtering style method.
 2.  VIVID uses more re-sampling information before aggregating the data
     down to single values.
 3.  Considers pairwise comparisons of importance metrics over B
@@ -55,7 +56,8 @@ outlined below.
     absolute value of the regression coefficients,
     \(s_i = |\hat{\beta}_i|\).
 4.  Calculate the variance of each pairwise comparison of ranks between
-    two features, \(h_{ij} = var(r_i - r_j)\).
+    two features,
+    <img src="https://latex.codecogs.com/gif.latex?h_{ij} = var(r_i - r_j)" />.
 5.  The features are then clustered using the corresponding rows in the
     \(p\) by \(p\) matrix \(H\) constructed in step (4).
 6.  The algorithm then searches through the dendogram to find the groups
@@ -78,7 +80,7 @@ devtools::install_github("binfnstats/VividR")
 ```
 
 ``` r
-library('VividR')
+library('VIVID')
 ```
 
 # The *sacurine* dataset
@@ -114,12 +116,7 @@ data("sacurine") #Load sacurine dataset from the 'ropls' package
 
 dat <- sacurine$dataMatrix
 outcomes <- sacurine$sampleMetadata$gender
-
-p <- NCOL(dat) # p = 109
-p
 ```
-
-    ## [1] 109
 
 The remaining parameters which can be set adjusted:
 
@@ -292,7 +289,7 @@ vivid.sacurine$selection[1:6,1:6]
 vivid.sacurine$sizes
 ```
 
-    ##  [1] 68 30 15 14 13 11  9  7  4  3
+    ##  [1] 68 30 15 14 13 11  9  7  4  3  2
 
 ### Method of comparison
 
@@ -309,7 +306,7 @@ vivid.sacurine$compareValues
 ```
 
     ##  [1] 384.4538 198.1562 150.7591 147.0434 144.0332 136.7904 126.6465 126.1071
-    ##  [9] 155.4008 157.9254
+    ##  [9] 155.4008 157.9254 224.3565
 
 ### Best feature group (Boolean)
 
@@ -373,7 +370,7 @@ will be large. Since this matrix is of the order \(p^2\), we have
 implemented a divide and conquer approach. Figure 1 describes the VIVID
 method when we use this approach.
 
-![Figure 1](VIVID_diagram.jpg)
+![Figure 1](figures/diagram.jpg)
 
 The way this functions is by dividing the data into \(g\) different
 groups and then applying VIVID to each group and identifying the best
@@ -383,7 +380,7 @@ however in this package we have decided to implement only two. This is
 done by either using disjoint groups or overlapping groups as seen in
 Figure 2.
 
-![Figure 2](grouping_VIVID.png)
+![Figure 2](figures/grouping_VIVID.png)
 
 To run this version of the code, the following function is used.
 
@@ -412,7 +409,7 @@ of \(g+1\) **vivid** outputs where the variance matrix is only included
 for the final iteration. The structure of the functions can bee seen in
 Figure 3.
 
-![Figure 3](function_structure.png)
+![Figure 3](figures/function_structure.png)
 
 ## Visualisation
 
@@ -446,7 +443,7 @@ vignette was compiled.
 sessionInfo()
 ```
 
-    ## R version 3.6.1 (2019-07-05)
+    ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
     ## Running under: Windows 10 x64 (build 18362)
     ## 
@@ -467,17 +464,21 @@ sessionInfo()
     ## [8] base     
     ## 
     ## other attached packages:
-    ## [1] ropls_1.18.2        Biobase_2.46.0      BiocGenerics_0.32.0
-    ## [4] VividR_0.1.0       
+    ## [1] ropls_1.18.8        Biobase_2.46.0      BiocGenerics_0.32.0
+    ## [4] VIVID_0.1          
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.3         compiler_3.6.1     pillar_1.4.3       iterators_1.0.12  
-    ##  [5] tools_3.6.1        digest_0.6.23      evaluate_0.14      tibble_2.1.3      
-    ##  [9] lattice_0.20-38    pkgconfig_2.0.3    rlang_0.4.3        Matrix_1.2-17     
-    ## [13] foreach_1.4.7      yaml_2.2.1         xfun_0.12          furrr_0.1.0       
-    ## [17] dplyr_0.8.3        stringr_1.4.0      knitr_1.27         globals_0.12.5    
-    ## [21] glmnet_3.0-2       grid_3.6.1         tidyselect_0.2.5   glue_1.3.1        
-    ## [25] listenv_0.8.0      R6_2.4.1           rmarkdown_2.1      purrr_0.3.3       
-    ## [29] magrittr_1.5       codetools_0.2-16   htmltools_0.4.0    matrixStats_0.55.0
-    ## [33] assertthat_0.2.1   future_1.16.0      shape_1.4.4        stringi_1.4.4     
-    ## [37] crayon_1.3.4
+    ##  [1] Rcpp_1.0.3          pillar_1.4.3        compiler_3.6.2     
+    ##  [4] timeSeries_3062.100 iterators_1.0.12    tools_3.6.2        
+    ##  [7] digest_0.6.23       evaluate_0.14       tibble_2.1.3       
+    ## [10] lattice_0.20-38     pkgconfig_2.0.3     rlang_0.4.3        
+    ## [13] Matrix_1.2-18       foreach_1.4.7       yaml_2.2.0         
+    ## [16] xfun_0.12           furrr_0.1.0         dplyr_0.8.3        
+    ## [19] stringr_1.4.0       knitr_1.27          globals_0.12.5     
+    ## [22] glmnet_3.0-2        grid_3.6.2          dendsort_0.3.3     
+    ## [25] tidyselect_0.2.5    glue_1.3.1          listenv_0.8.0      
+    ## [28] R6_2.4.1            spatial_7.3-11      rmarkdown_2.1      
+    ## [31] purrr_0.3.3         magrittr_1.5        fBasics_3042.89.1  
+    ## [34] matrixStats_0.55.0  codetools_0.2-16    htmltools_0.4.0    
+    ## [37] assertthat_0.2.1    timeDate_3043.102   future_1.16.0      
+    ## [40] shape_1.4.4         stringi_1.4.4       crayon_1.3.4

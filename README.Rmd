@@ -10,7 +10,7 @@ The **VIVID** (Variability of Variable Importance Differences) package implement
 
 Within VIVID we aim to achieve a variety of goals which include:
 
-1. Remove the arbitrary cut-off employed when selecting the top $k$ features through a filtering style method.
+1. Remove the arbitrary cut-off employed when selecting the top <img src="https://latex.codecogs.com/gif.latex?k" /> features through a filtering style method.
 2. VIVID uses more re-sampling information before aggregating the data down to single values.
 3. Considers pairwise comparisons of importance metrics over B re-samples.
 4. Provides a visualization method, through which key features can be identified.
@@ -26,7 +26,7 @@ When a regression model is fit to data, the size of corresponding coefficients, 
     + Bootstrapping is performed by generating new observation weights from the data. These weights are generated from an $exp(1)$ distribution and sum to $n$.
     + A logistic regression is then fit to each re sample using Ridge estimates.
 3. Calculate measures of feature importance $s_i$ by taking the absolute value of the regression coefficients, $s_i = |\hat{\beta}_i|$.
-4. Calculate the variance of each pairwise comparison of ranks between two features, $h_{ij} = var(r_i - r_j)$.
+4. Calculate the variance of each pairwise comparison of ranks between two features, <img src="https://latex.codecogs.com/gif.latex?h_{ij} = var(r_i - r_j)" />.
 5. The features are then clustered using the corresponding rows in the $p$ by $p$ matrix $H$ constructed in step (4).
 6. The algorithm then searches through the dendogram to find the groups of features with the lowest pairwise variance.
 7. Once the groups of features have been identified, the Extended Bayesian Information Criterion (EBIC) is then used to identify the best group of features.
@@ -43,7 +43,7 @@ devtools::install_github("binfnstats/VividR")
 ```
 
 ```{r}
-library('VividR')
+library('VIVID')
 ```
 
 # The *sacurine* dataset
@@ -203,7 +203,7 @@ vivid.saccurinenew <- vivid_crit(vivid.sacurine,
 
 If the dataset has a large number of features then the variance matrix will be large. Since this matrix is of the order $p^2$, we have implemented a divide and conquer approach. Figure 1 describes the VIVID method when we use this approach.
 
-![Figure 1](figures/VIVID_diagram.jpg)
+![Figure 1](figures/diagram.jpg)
 
 The way this functions is by dividing the data into $g$ different groups and then applying VIVID to each group and identifying the best features. We then combine those set of features and run VIVID again to select the final features. There are multiple ways to split the data, however in this package we have decided to implement only two. This is done by either using disjoint groups or overlapping groups as seen in Figure 2.
 
