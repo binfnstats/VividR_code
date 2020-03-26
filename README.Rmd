@@ -203,11 +203,11 @@ vivid.saccurinenew <- vivid_crit(vivid.sacurine,
 
 If the dataset has a large number of features then the variance matrix will be large. Since this matrix is of the order $p^2$, we have implemented a divide and conquer approach. Figure 1 describes the VIVID method when we use this approach.
 
-![Figure 1](VIVID_diagram.jpg)
+![Figure 1](figures/VIVID_diagram.jpg)
 
 The way this functions is by dividing the data into $g$ different groups and then applying VIVID to each group and identifying the best features. We then combine those set of features and run VIVID again to select the final features. There are multiple ways to split the data, however in this package we have decided to implement only two. This is done by either using disjoint groups or overlapping groups as seen in Figure 2.
 
-![Figure 2](grouping_VIVID.png)
+![Figure 2](figures/grouping_VIVID.png)
 
 To run this version of the code, the following function is used.
 
@@ -231,7 +231,7 @@ The only new features added are:
 
 The output will be similar for the **vivid** output but contain a list of $g+1$ **vivid** outputs where the variance matrix is only included for the final iteration. The structure of the functions can bee seen in Figure 3.
 
-![Figure 3](function_structure.png)
+![Figure 3](figures/function_structure.png)
 
 ## Visualisation
 
