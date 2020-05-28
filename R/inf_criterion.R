@@ -58,8 +58,6 @@ inf_criterion = function(model,
   H = XScaled %*% solve(t(XScaled) %*% XScaled + ld) %*% t(XScaled)
   df = fBasics::tr(H)
   
-  df = sum(model)
-  
   deviance = (1L - GlmFit$"dev.ratio") * GlmFit$"nulldev"
 
   base::switch(
