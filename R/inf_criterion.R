@@ -53,19 +53,19 @@ inf_criterion = function(model,
     lambda = CVGlmFit[[lambda]]
   )
 
-  XScaled = scale(x)
+  XScaled = scale(xNew)
   ld = CVGlmFit[[lambda]] * diag(ncol(XScaled))
   H = XScaled %*% solve(t(XScaled) %*% XScaled + ld) %*% t(XScaled)
   df = fBasics::tr(H)
   
-  deviance = (1L - GlmFit$"dev.ratio") * GlmFit$"nulldev"
+  deviance = deviance(GlmFit)
 
   base::switch(
     metric,
-    "AIC" = deviance + 2 * df,
-    "AICC" = deviance + 2 * df + 2 * (df ^ 2 + df) / (n - df - 1),
-    "BIC" = deviance + log(n) * df,
-    "EBIC" = deviance + log(n) * df + 2 * gamma * lchoose(n = P, k = df),
+    "AIC" = c(deviance + 2 * df, deviance, df),
+    "AICC" = c(deviance + 2 * df + 2 * (df ^ 2 + df) / (n - df - 1), deviance, df),
+    "BIC" = c(deviance + log(n) * df, deviance, df),
+    "EBIC" = c(deviance + log(n) * df + 2 * gamma * lchoose(n = P, k = df), deviance, df),
     NA
   )
 

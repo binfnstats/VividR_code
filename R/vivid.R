@@ -150,8 +150,9 @@ vivid =
                             lambda = lambda,
                             metric = compareMethod,
                             gamma = gamma)
-
-      optModel = selectionPath[which.min(compareValues),]
+     
+     rownames(compareValues) = c("Metric", "Deviance", "df")
+      optModel = selectionPath[which.min(compareValues[1,]),]
 
     }
 

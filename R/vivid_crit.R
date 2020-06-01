@@ -37,18 +37,25 @@
 #' 
 #' newVivid$optFeatures
 
-vivid_crit = function(vividObj, x, y, metric, lambda = 'lambda.1se') {
+vivid_crit = function(vividObj, x, y, metric) {
   selectionPath = vividObj$selection
 
-  compareValues = base::apply(
-    X = selectionPath,
-    MARGIN = 1,
-    FUN = inf_criterion,
-    x = x,
-    y = y,
-    lambda = lambda,
-    metric = metric
-  )
+  n = base::length(y)
+  P = base::NCOL(x)
+  deviance = vividObj$compareValues[2,]
+  df = vividObj$compareValues[3,]
+  compareValues =   rbind(base::switch(
+    metric,
+    "AIC" = deviance + 2 * df,
+    "AICC" = deviance + 2 * df + 2 * (df ^ 2 + df) / (n - df - 1),
+    "BIC" = deviance + log(n) * df,
+    "EBIC" = deviance + log(n) * df + 2 * gamma * lchoose(n = P, k = df),
+    NA
+  ),
+  deviance,
+  df)
+  rownames(compareValues) = c("Metric", "Deviance", "df")
+    
   optModel = selectionPath[which.min(compareValues), ]
 
   optFeatures = base::names(x = optModel)[base::unlist(x = optModel)]
