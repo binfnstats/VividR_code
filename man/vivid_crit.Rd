@@ -4,7 +4,7 @@
 \alias{vivid_crit}
 \title{Change the information criteria used in VIVID}
 \usage{
-vivid_crit(vividObj, x, y, metric, lambda = "lambda.1se")
+vivid_crit(vividObj, x, y, metric)
 }
 \arguments{
 \item{vividObj}{An object passed from the vivid() funciton.}
@@ -15,8 +15,6 @@ features. column names and row names are recommended.}
 \item{y}{response variable, restricted to two classes.}
 
 \item{metric}{AIC,  AICc, BIC or EBIC.}
-
-\item{lambda}{Used in cv.glmnet}
 }
 \value{
 A list of results:

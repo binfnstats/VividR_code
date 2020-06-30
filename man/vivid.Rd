@@ -60,15 +60,3 @@ A list of results:
 \description{
 VIVID
 }
-\examples{
-library('ropls')
-data("sacurine") #Load sacurine dataset from the 'ropls' package
-
-dat = sacurine$dataMatrix
-outcomes = sacurine$sampleMetadata$gender
-
-vividResults = vivid(x = dat,
-      y = outcomes)
-      
-vividResults$optFeatures
-}

@@ -6,7 +6,6 @@
 #' features. column names and row names are recommended.
 #' @param y response variable, restricted to two classes.
 #' @param metric AIC,  AICc, BIC or EBIC.
-#' @param lambda Used in cv.glmnet
 #'
 #' @return A list of results:
 #' \itemize{
@@ -56,7 +55,7 @@ vivid_crit = function(vividObj, x, y, metric) {
   df)
   rownames(compareValues) = c("Metric", "Deviance", "df")
     
-  optModel = selectionPath[which.min(compareValues), ]
+  optModel = selectionPath[which.min(compareValues[1,]), ]
 
   optFeatures = base::names(x = optModel)[base::unlist(x = optModel)]
 
